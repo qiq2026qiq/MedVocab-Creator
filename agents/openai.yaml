@@ -1,0 +1,4 @@
+interface:
+  display_name: "Anki Vocabulary Deck"
+  short_description: "Create simple image-and-audio Anki vocabulary decks"
+  default_prompt: "Use $anki-vocab-deck to turn this vocabulary list into my preferred Anki deck."
