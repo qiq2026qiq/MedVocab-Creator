@@ -10,7 +10,8 @@
   <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-171717?style=flat-square">
   <img alt="Anki package" src="https://img.shields.io/badge/Output-.apkg-3f3f3f?style=flat-square">
   <img alt="Offline audio" src="https://img.shields.io/badge/Audio-Offline-626262?style=flat-square">
-  <img alt="Light and dark mode" src="https://img.shields.io/badge/Mode-Light%20%2B%20Dark-858585?style=flat-square">
+  <img alt="Light and dark mode" src="https://img.shields.io/badge/Mode-Light%20%2B%20Dark-626262?style=flat-square">
+  <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-3f3f3f?style=flat-square">
 </p>
 
 ---
@@ -59,6 +60,8 @@ This skill keeps the design quiet so the vocabulary remains the focus. It create
 
 ```bash
 git clone https://github.com/qiq2026qiq/anki-vocab-deck.git ~/.codex/skills/anki-vocab-deck
+cd ~/.codex/skills/anki-vocab-deck
+python3 -m pip install -r requirements.txt
 ```
 
 Restart Codex if the skill does not appear immediately.
@@ -71,18 +74,18 @@ Use $anki-vocab-deck to turn this vocabulary list into an Anki deck.
 
 The skill also activates when you ask Codex to turn a lesson vocabulary list or terminology table into Anki cards in your preferred style.
 
-## Build locally
+## Try the included example
 
-The included builder accepts a JSON specification and exports an Anki package:
+From the repository root:
 
 ```bash
-python3 scripts/build_deck.py spec.json --output deck.apkg
+python3 scripts/build_deck.py examples/spec.example.json --output example.apkg
 ```
 
-**Requirements**
+The command creates a one-card deck and runs the package checks automatically. Use [examples/spec.example.json](./examples/spec.example.json) as the starting point for your own deck.
 
-- Python package: `genanki`
-- macOS audio tools: `say` and `afconvert`
+> [!NOTE]
+> Automatic pronunciation generation currently uses the macOS `say` and `afconvert` tools. On Windows or Linux, provide a mono WAV file through each card's optional `audio_path` field.
 
 <details>
 <summary><strong>Repository structure</strong></summary>
@@ -90,10 +93,14 @@ python3 scripts/build_deck.py spec.json --output deck.apkg
 ```text
 anki-vocab-deck/
 ├── SKILL.md
+├── LICENSE
+├── requirements.txt
 ├── agents/
 │   └── openai.yaml
 ├── assets/
 │   └── anki-vocab-banner.svg
+├── examples/
+│   └── spec.example.json
 └── scripts/
     └── build_deck.py
 ```
@@ -104,4 +111,4 @@ anki-vocab-deck/
 
 > No bright accent colors, gradients, oversized images, decorative panels, or mismatched font sizes.
 
-See [SKILL.md](./SKILL.md) for the complete workflow and JSON field contract.
+See [SKILL.md](./SKILL.md) for the complete workflow and JSON field contract. Released under the [MIT License](./LICENSE).
