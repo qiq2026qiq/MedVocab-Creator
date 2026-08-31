@@ -1,25 +1,61 @@
-# Anki Vocabulary Deck Skill
+<p align="center">
+  <img src="./assets/anki-vocab-banner.svg" alt="Anki Vocabulary Deck Skill" width="100%">
+</p>
 
-A reusable Codex skill for creating import-ready Anki `.apkg` vocabulary decks with a calm, minimal design.
+<p align="center">
+  A reusable Codex skill for turning vocabulary lists into calm, consistent, import-ready Anki decks.
+</p>
 
-## What it creates
+<p align="center">
+  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-171717?style=flat-square">
+  <img alt="Anki package" src="https://img.shields.io/badge/Output-.apkg-3f3f3f?style=flat-square">
+  <img alt="Offline audio" src="https://img.shields.io/badge/Audio-Offline-626262?style=flat-square">
+  <img alt="Light and dark mode" src="https://img.shields.io/badge/Mode-Light%20%2B%20Dark-858585?style=flat-square">
+</p>
 
-- Front: term, clickable American-English pronunciation, and IPA
-- Back: Chinese meaning, concise study note, English-labeled image, and source attribution
-- Offline audio embedded in every card
-- Images embedded rather than hotlinked
-- Light- and dark-mode support
+---
 
-## Default visual style
+## A deck that stays out of the way
 
-- Black, white, and gray only
-- One consistent 20px text size
-- No accent colors, gradients, decorative panels, or shadows
-- Images limited to 400 × 300px
-- Aspect ratio preserved without cropping or stretching
-- White image background for diagrams with transparent backgrounds
+This skill keeps the design quiet so the vocabulary remains the focus. It creates cards with a predictable layout, readable type, compact images, and pronunciation that works offline.
 
-## Install
+<table>
+  <tr>
+    <th width="50%">Front</th>
+    <th width="50%">Back</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <br>
+      <strong>uterus</strong><br>
+      🔊 American pronunciation<br>
+      <code>/ˈjuːtərəs/</code>
+      <br><br>
+    </td>
+    <td align="center">
+      <br>
+      <strong>子宫</strong><br>
+      concise study note<br>
+      English-labeled image<br>
+      source attribution
+      <br><br>
+    </td>
+  </tr>
+</table>
+
+## What is included
+
+| Study feature | Default behavior |
+| --- | --- |
+| Pronunciation | Clickable American-English audio embedded in every card |
+| Phonetics | IPA shown directly under the term |
+| Explanation | Concise Chinese meaning and a short learning note |
+| Visual memory | Embedded English-labeled image with source attribution |
+| Appearance | Black, white, and gray; one consistent 20px text size |
+| Image sizing | Maximum 400 × 300px, with aspect ratio preserved |
+| Compatibility | Designed for both light and dark Anki themes |
+
+## Quick start
 
 ```bash
 git clone https://github.com/qiq2026qiq/anki-vocab-deck.git ~/.codex/skills/anki-vocab-deck
@@ -27,9 +63,7 @@ git clone https://github.com/qiq2026qiq/anki-vocab-deck.git ~/.codex/skills/anki
 
 Restart Codex if the skill does not appear immediately.
 
-## Use
-
-Invoke the skill directly:
+Then ask Codex:
 
 ```text
 Use $anki-vocab-deck to turn this vocabulary list into an Anki deck.
@@ -37,14 +71,37 @@ Use $anki-vocab-deck to turn this vocabulary list into an Anki deck.
 
 The skill also activates when you ask Codex to turn a lesson vocabulary list or terminology table into Anki cards in your preferred style.
 
-## Local builder
+## Build locally
 
-The included builder accepts a JSON specification:
+The included builder accepts a JSON specification and exports an Anki package:
 
 ```bash
 python3 scripts/build_deck.py spec.json --output deck.apkg
 ```
 
-Required Python package: `genanki`. On macOS, pronunciation audio is generated locally with `say` and converted to WAV with `afconvert`.
+**Requirements**
 
-See [SKILL.md](./SKILL.md) for the full workflow and JSON field contract.
+- Python package: `genanki`
+- macOS audio tools: `say` and `afconvert`
+
+<details>
+<summary><strong>Repository structure</strong></summary>
+
+```text
+anki-vocab-deck/
+├── SKILL.md
+├── agents/
+│   └── openai.yaml
+├── assets/
+│   └── anki-vocab-banner.svg
+└── scripts/
+    └── build_deck.py
+```
+
+</details>
+
+## Design promise
+
+> No bright accent colors, gradients, oversized images, decorative panels, or mismatched font sizes.
+
+See [SKILL.md](./SKILL.md) for the complete workflow and JSON field contract.
