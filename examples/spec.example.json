@@ -1,5 +1,5 @@
 {
-  "deck_title": "Anki Vocabulary Deck Example",
+  "deck_title": "Anki Vocabulary Forge Example",
   "voice": "Samantha",
   "speech_rate": 145,
   "cards": [
@@ -10,7 +10,7 @@
       "note_html": "A hollow muscular organ in the female reproductive system.",
       "image": "assets/anki-vocab-banner.svg",
       "source_name": "Repository demo asset · MIT License",
-      "source_url": "https://github.com/qiq2026qiq/anki-vocab-deck/blob/main/assets/anki-vocab-banner.svg",
+      "source_url": "https://github.com/qiq2026qiq/anki-vocab-forge/blob/main/assets/anki-vocab-banner.svg",
       "audio_text": "uterus"
     }
   ]
