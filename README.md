@@ -28,16 +28,16 @@ This skill keeps the design quiet so the vocabulary remains the focus. It create
   <tr>
     <td align="center">
       <br>
-      <strong>uterus</strong><br>
+       <strong>anatomy</strong><br>
       🔊 American pronunciation<br>
-      <code>/ˈjuːtərəs/</code>
+       <code>/əˈnætəmi/</code>
       <br><br>
     </td>
     <td align="center">
       <br>
-      <strong>子宫</strong><br>
+       <strong>解剖学</strong><br>
       concise study note<br>
-      English-labeled image<br>
+       study of body structures<br>
       source attribution
       <br><br>
     </td>
