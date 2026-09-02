@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
-  <title id="title">Anki Vocabulary Deck Skill</title>
+  <title id="title">Anki Vocabulary Forge Skill</title>
   <desc id="desc">Minimal vocabulary cards with IPA, offline audio, Chinese notes, and images.</desc>
   <rect width="1200" height="420" rx="28" fill="#171717"/>
   <g opacity="0.18" stroke="#8a8a8a" stroke-width="1">
@@ -10,7 +10,7 @@
     <rect width="142" height="30" rx="15" fill="#f2f2f2"/>
     <text x="71" y="20" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="13" font-weight="700" letter-spacing="1.8" fill="#171717">CODEX SKILL</text>
     <text x="0" y="93" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="58" font-weight="750" letter-spacing="-2" fill="#ffffff">ANKI VOCABULARY</text>
-    <text x="0" y="151" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="58" font-weight="750" letter-spacing="-2" fill="#bdbdbd">DECK</text>
+    <text x="0" y="151" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="58" font-weight="750" letter-spacing="-2" fill="#bdbdbd">FORGE</text>
     <text x="2" y="197" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="19" fill="#d5d5d5">Words that sound right, look calm, and stay with you.</text>
     <g transform="translate(0 238)" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="13" font-weight="650" letter-spacing="0.8">
       <rect width="92" height="34" rx="17" fill="none" stroke="#777"/>
