@@ -29,16 +29,18 @@ CSS = r"""
   padding: 24px;
 }
 .word, .ipa, .meaning, .note, .source { font-size: inherit; }
+.word, .ipa, .meaning { white-space: pre-line; }
 .word, .meaning { font-weight: 600; }
 .word { line-height: 1.5; }
 .front-line { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
 .audio { display: inline-flex; align-items: center; min-width: 28px; }
 .audio .replay-button svg { width: 32px; height: 32px; }
+.ipa, .meaning { line-height: 1.6; }
 .ipa { margin-top: 10px; color: #666666; }
 hr#answer { border: 0; border-top: 1px solid #cccccc; margin: 26px 0 22px; }
 .note { max-width: 720px; margin: 16px auto 20px; padding: 0; line-height: 1.7; text-align: left; }
-.image { box-sizing: border-box; max-width: 416px; margin: 16px auto; padding: 8px; background: #ffffff; }
-.image img { display: block; max-width: 400px; max-height: 300px; width: auto; height: auto; margin: 0 auto; background: #ffffff; object-fit: contain; }
+.image { box-sizing: border-box; margin: 16px auto; padding: 0; background: transparent; }
+.image img { display: block; max-width: 440px; max-height: 320px; width: auto; height: auto; margin: 0 auto; background: transparent; object-fit: contain; }
 .source { max-width: 720px; margin: 10px auto 0; line-height: 1.45; color: #777777; }
 .source a { color: inherit; text-decoration: underline; }
 .nightMode.card, .nightMode .card { color: #eeeeee !important; background: #1f1f1f !important; }
@@ -46,7 +48,7 @@ hr#answer { border: 0; border-top: 1px solid #cccccc; margin: 26px 0 22px; }
 .nightMode .ipa, .nightMode .source { color: #bdbdbd !important; }
 .nightMode hr#answer { border-top-color: #555555 !important; }
 .nightMode .source a { color: inherit !important; }
-.nightMode .image, .nightMode .image img { background: #ffffff !important; }
+.nightMode .image, .nightMode .image img { background: transparent !important; }
 """
 
 
@@ -90,8 +92,8 @@ def build(spec_path: Path, output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     model = genanki.Model(
-        stable_id("anki-vocab-model", "minimal-audio-image-v1"),
-        "Minimal Vocabulary with Audio and Image",
+        stable_id("anki-vocab-model", "minimal-audio-image-v2-grouped-lines"),
+        "Minimal Vocabulary with Audio and Image v2",
         fields=[
             {"name": "Word"}, {"name": "IPA"}, {"name": "Audio"},
             {"name": "Meaning"}, {"name": "Note"}, {"name": "Image"},
