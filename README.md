@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/anki-vocab-banner.svg" alt="Anki Vocabulary Deck Skill" width="100%">
+  <img src="./assets/anki-vocab-banner.svg" alt="Anki Vocabulary Forge Skill" width="100%">
 </p>
 
 <p align="center">
@@ -59,8 +59,8 @@ This skill keeps the design quiet so the vocabulary remains the focus. It create
 ## Quick start
 
 ```bash
-git clone https://github.com/qiq2026qiq/anki-vocab-deck.git ~/.codex/skills/anki-vocab-deck
-cd ~/.codex/skills/anki-vocab-deck
+git clone https://github.com/qiq2026qiq/anki-vocab-forge.git ~/.codex/skills/anki-vocab-forge
+cd ~/.codex/skills/anki-vocab-forge
 python3 -m pip install -r requirements.txt
 ```
 
@@ -69,7 +69,7 @@ Restart Codex if the skill does not appear immediately.
 Then ask Codex:
 
 ```text
-Use $anki-vocab-deck to turn this vocabulary list into an Anki deck.
+Use $anki-vocab-forge to turn this vocabulary list into an Anki deck.
 ```
 
 The skill also activates when you ask Codex to turn a lesson vocabulary list or terminology table into Anki cards in your preferred style.
@@ -91,7 +91,7 @@ The command creates a one-card deck and runs the package checks automatically. U
 <summary><strong>Repository structure</strong></summary>
 
 ```text
-anki-vocab-deck/
+anki-vocab-forge/
 ├── SKILL.md
 ├── LICENSE
 ├── requirements.txt
