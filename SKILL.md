@@ -1,9 +1,9 @@
 ---
-name: anki-vocab-deck
+name: anki-vocab-forge
 description: Create or revise Anki vocabulary decks in the user's established minimal style, with contrast-grouped terms, IPA, offline pronunciation audio, concise Chinese explanations, and embedded attributed images. By default, import directly through AnkiConnect; create a downloadable .apkg only when the user explicitly requests a file. Use when the user asks to turn a word list, lesson vocabulary, or terminology table into Anki cards, or asks for “my preferred Anki style.” Do not use for ordinary Anki troubleshooting unless deck creation or styling is requested.
 ---
 
-# Anki Vocabulary Deck
+# Anki Vocabulary Forge
 
 Preserve every supplied term unless the user requests selection or deduplication. By default, import directly through AnkiConnect into the exact deck or subdeck the user names (for example, `MT::风湿免疫病`). If the user has not specified a target deck or subdeck, ask where the cards should go before importing. Only when the user explicitly asks for an `.apkg` or another file should you generate the file instead of connecting to Anki; in that case, do not perform a live AnkiConnect import unless the user asks for both.
 
