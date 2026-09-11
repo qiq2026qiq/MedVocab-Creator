@@ -14,6 +14,10 @@
   <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-3f3f3f?style=flat-square">
 </p>
 
+<p align="center">
+  <a href="./CHANGELOG.md">查看更新日志 / Changelog</a>
+</p>
+
 ---
 
 ## A deck that stays out of the way
