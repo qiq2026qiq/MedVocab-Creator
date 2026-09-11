@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/anki-vocab-banner.svg?v=2" alt="MedVocab-Creator Skill" width="100%">
+  <img src="./assets/medterm-to-anki-banner.svg?v=2" alt="MedTerm to Anki Skill" width="100%">
 </p>
 
 <p align="center">
@@ -59,8 +59,8 @@ This skill keeps the design quiet so the vocabulary remains the focus. It create
 ## Quick start
 
 ```bash
-git clone https://github.com/qiq2026qiq/anki-vocab-forge.git ~/.codex/skills/anki-vocab-forge
-cd ~/.codex/skills/anki-vocab-forge
+git clone https://github.com/qiq2026qiq/MedVocab-Creator.git ~/.codex/skills/medterm-to-anki
+cd ~/.codex/skills/medterm-to-anki
 python3 -m pip install -r requirements.txt
 ```
 
@@ -69,7 +69,7 @@ Restart Codex if the skill does not appear immediately.
 Then ask Codex:
 
 ```text
-Use $anki-vocab-forge to turn this vocabulary list into an Anki deck.
+Use $medterm-to-anki to turn this medical terminology list into an Anki deck.
 ```
 
 The skill also activates when you ask Codex to turn a lesson vocabulary list or terminology table into Anki cards in your preferred style.
@@ -91,14 +91,14 @@ The command creates a one-card deck and runs the package checks automatically. U
 <summary><strong>Repository structure</strong></summary>
 
 ```text
-anki-vocab-forge/
+medterm-to-anki/
 ├── SKILL.md
 ├── LICENSE
 ├── requirements.txt
 ├── agents/
 │   └── openai.yaml
 ├── assets/
-│   └── anki-vocab-banner.svg
+│   └── medterm-to-anki-banner.svg
 ├── examples/
 │   └── spec.example.json
 └── scripts/
