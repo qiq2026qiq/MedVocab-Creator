@@ -1,4 +1,4 @@
 interface:
-  display_name: "Anki Vocabulary Forge"
-  short_description: "Create simple image-and-audio Anki vocabulary decks"
-  default_prompt: "Use $anki-vocab-forge to turn this vocabulary list into my preferred Anki deck."
+  display_name: "MedTerm to Anki"
+  short_description: "Build high-quality medical terminology Anki decks"
+  default_prompt: "Use $medterm-to-anki to turn this medical terminology list into my preferred Anki deck."
