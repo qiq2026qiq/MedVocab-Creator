@@ -1,68 +1,69 @@
 ---
-name: anki-vocab-forge
-description: Create or revise Anki vocabulary decks in the user's established minimal style, with contrast-grouped terms, IPA, offline pronunciation audio, concise Chinese explanations, and embedded attributed images. By default, import directly through AnkiConnect; create a downloadable .apkg only when the user explicitly requests a file. Use when the user asks to turn a word list, lesson vocabulary, or terminology table into Anki cards, or asks for “my preferred Anki style.” Do not use for ordinary Anki troubleshooting unless deck creation or styling is requested.
+name: medterm-to-anki
+description: Create or revise medical-English Anki cards in the user's minimal style. Use for medical vocabulary lists, lesson terminology, or requests for the user's preferred Anki style. Produces one card per input entry with General American IPA, offline macOS audio, concise Chinese explanations, and an optional Cleveland Clinic image. Import through AnkiConnect by default; create an .apkg only when explicitly requested. Do not use for general Anki troubleshooting.
 ---
 
-# Anki Vocabulary Forge
+# MedTerm to Anki
 
-Preserve every supplied term unless the user requests selection or deduplication. By default, import directly through AnkiConnect into the exact deck or subdeck the user names (for example, `MT::风湿免疫病`). If the user has not specified a target deck or subdeck, ask where the cards should go before importing. Only when the user explicitly asks for an `.apkg` or another file should you generate the file instead of connecting to Anki; in that case, do not perform a live AnkiConnect import unless the user asks for both.
+Create compact, medically accurate cards. Preserve every supplied input entry unless the user requests selection or deduplication. Ask for the destination deck/subdeck before importing if none is given. The default note type is `Minimal Vocabulary with Audio and Image v2`.
 
 ## Card contract
 
-Each note has one forward card:
+Create one forward card per note:
 
-- Front: one term or a compact contrast group with a clickable pronunciation button beside it; IPA appears below in the same order.
-- Back: the corresponding Chinese meaning or meanings in the same order, one concise study note, one relevant high-quality image with English labels when available, and image attribution/source.
-- For synonym cards, keep all synonyms on one card and read them sequentially in the audio.
-- Default to General American IPA and American-English audio unless the user requests another variety.
+- Front: exactly one input entry as provided, a user-triggered pronunciation button, and matching General American IPA.
+- Back: the Chinese meaning, one concise Memory Note, and, only when available, one medically relevant Cleveland Clinic image with linked attribution.
+- Preserve the existing 20px grayscale light/dark layout, transparent image container, natural aspect ratio, and orientation-aware image bounds.
+- Use American-English audio unless another variety is requested.
 
-## Grouping and card economy
+## Medical judgment
 
-Do not mechanically create one card for every input row. Before building, identify the smallest useful learning units and consolidate terms when comparison makes them easier to remember.
+Make one independent card for every supplied input entry. Do not automatically split parenthetical abbreviations, slash-separated aliases, or synonyms; keep them on the same card. Split only when the user explicitly requests it or the input already contains separate entries. Preserve the supplied wording unless correction is needed for medical or linguistic accuracy.
 
-- Put two to four terms on one card when they share the same headword and form a natural contrast, differ mainly by one modifier, or are routinely learned together. Strong defaults include `closed fracture ↔ open fracture`, `stable fracture ↔ unstable fracture`, `closed reduction ↔ open reduction`, and `internal fixation ↔ external fixation`.
-- Also combine true synonyms, alternate names, and acronym expansions on one card.
-- Preserve every supplied term, but card count may be lower than term count because several terms can belong to one note.
-- On a grouped card, put each English term on its own line. Put each IPA and Chinese meaning on its own corresponding line in exactly the same order. Use `audio_text` to read all terms sequentially with a short pause.
-- Use one comparison note that states the decisive difference, and choose an image that supports the whole group rather than only one member.
-- Do not group terms merely because they occur in the same chapter. Keep a term separate when it has a distinct mechanism, requires independent emergency recognition, needs a different image, or would make the card crowded. Prefer compact groups of two; use three or four only when the relationship is genuinely clearer together.
+Use the LLM for terminology interpretation, IPA, Chinese meaning, concise notes, medically specific Cleveland Clinic image queries, and final image/source judgment. Let `scripts/build_deck.py` handle deterministic formatting, escaping, paths, hashes, caches, TTS, concurrency, media, packaging, and validation.
 
-## Fixed visual style
+## Media rules
 
-Treat these as defaults learned from the user; do not ask the user to rediscover them:
+Use images from Cleveland Clinic only; never use another website and never generate or synthesize an image. Search only Cleveland Clinic for each cache miss. Use an image only when it directly and accurately represents the medical entry and has adequate teaching value. Avoid decorative photos, busy collages, arbitrary thumbnails, and weak matches. If Cleveland Clinic has no suitable image, set `no_image: true` and create the card with empty Image and Source fields; do not continue searching elsewhere. Never reuse image content in the same deck unless requested.
 
-- Use only black, white, and gray. No accent colors, gradients, decorative panels, or shadows.
-- Use Anki's ordinary 20px size for every text field: term, IPA, meaning, note, and source. Hierarchy may use spacing and modest bold weight, never different font sizes.
-- Support Anki light and dark themes with high-contrast grayscale text.
-- Do not put a white (or any colored) backing panel, padding, or frame behind images. Keep the image container transparent in both light and dark mode; source images that genuinely contain a white background are acceptable.
-- Preserve each image's natural aspect ratio. Apply orientation-aware bounds rather than placing every image into one apparent box: landscape images may use up to 440px × 255px, portrait images up to 270px × 320px, and square images up to 320px × 320px. Never crop, stretch, or require per-card manual sizing.
-- Treat these bounds as defaults, not locks: apply them only when the image has no explicit `width`, `height`, or inline `style` set. Never use CSS `!important` on an image's width or height. If the user later sets an image width or height in Anki, remove the default bounds for that image so the explicit per-card setting controls the final display size.
-- Keep audio user-triggered rather than autoplaying.
+Use cache-first image handling. The default cache is `~/.cache/medterm-to-anki/` (`audio/`, `images/`, `metadata/`); `MEDTERM_TO_ANKI_CACHE` or `--cache-dir` may override it. Image identity is the normalized full input entry plus normalized `image_query`; uncertainty is a cache miss. A valid negative cache means a successful Cleveland Clinic search confirmed no suitable image within the last 90 days; it may be reused until expiry. Every new term, expired negative entry, and uncertain result must be searched. Network errors, blocked downloads, empty/failed tool responses, or incomplete review are search failures—not evidence of no image—and must remain cache misses for later retry. Use `refresh_image_cache: true` to bypass either positive or negative cache. Never accept a weak image when a medically suitable candidate has not been found.
 
-## Images and audio
+The script uses macOS offline `say` + `afconvert`, caches pronunciation-dependent output, and defaults to 8 concurrent TTS workers. Reduce with `--audio-workers` if the machine becomes unstable; do not replace this with network TTS.
 
-### Medical-image selection
+## Workflow
 
-Use externally sourced web images only. Never generate, draw, or synthesize an image for a card. Download/embed the selected image rather than hotlinking it, and put a compact source link on the back.
+1. Process the full input list in one semantic pass. Return compact structured JSON with one card per supplied input entry, all semantic content, and a stable, medically specific Cleveland Clinic `image_query` for every card. Do not spend turns narrating intermediate drafting.
+2. Inspect the whole image cache and use the available web-search tool for misses in its largest supported parallel batches. Add returned official page URLs to each card's temporary `candidate_pages`, then run the bundled parallel candidate finder to open those pages and extract Cleveland Clinic image candidates concurrently. It also attempts its own site-restricted discovery, but `no-results` is not proof of no image. Medically judge candidates for every term individually. For each successfully completed search, either add `image`, `source_name`, and `source_url` for an approved Cleveland Clinic image, or set `no_image: true`, `no_image_reason: "confirmed_no_suitable_cleveland_image"`, and a timezone-aware ISO-8601 `image_search_checked_at`. A `search-failed`, `no-results`, or `incomplete` result cannot justify `no_image`: retry it with the available web-search tool and do not build/import while it remains unresolved. Do not search another source:
 
-- **Cleveland Clinic first when accurate:** search Cleveland Clinic before other sources and use its image whenever it has a clear, medically accurate image that directly matches the card term or grouped terms. Do not use a Cleveland Clinic image merely because it is from Cleveland Clinic if the image does not actually depict the term.
-- **Reliable fallback only:** if Cleveland Clinic has no accurate, usable match, use another reliable source such as a medical school, hospital, professional medical site, peer-reviewed paper, government health agency, OpenStax, NIH/NCI/NIDDK, or Wikimedia Commons with clear reuse terms. Avoid arbitrary unlicensed image-result thumbnails.
-- **Direct semantic match:** choose the most typical, recognisable feature of the exact term—ideally a learner can see the image and recall the word. A merely related disease image is not sufficient. On a grouped card, the single image must support the whole contrast or synonym group.
-- **Teaching clarity over visual appeal:** choose the image that best helps a medical student understand and remember the term. Prefer a prominent subject, adequate resolution, little or no text, little or no watermark, and avoid busy review figures, collages, or decorative stock photography.
-- **No duplicate pictures:** use one distinct image per card. Do not reuse an image within the same deck unless the user explicitly asks for reuse. Before import, check both that every card has a unique image reference and that each image matches its card's word or grouped words.
+   ```bash
+   python3 scripts/build_deck.py spec.json --inspect-image-cache
+   python3 scripts/search_cleveland_images.py misses.json --output candidates.json --workers 8
+   ```
 
-Create one offline audio file per card. On macOS, prefer the local `Samantha` voice at a measured rate and convert to mono 22,050 Hz WAV. If local TTS is unavailable, use another authorized local TTS method; do not silently omit audio.
+   `search_cleveland_images.py` accepts optional `candidate_pages` arrays, opens cards and pages concurrently (default 8 workers), and permits only `clevelandclinic.org` page and image URLs in its output. Its candidates accelerate discovery but never replace medical review or proof that a no-image search completed successfully.
 
-## Build and verify
+3. Build an explicitly requested package:
 
-For `.apkg` output, prepare a JSON specification and run:
+   ```bash
+   python3 scripts/build_deck.py spec.json --output deck.apkg
+   ```
 
-```bash
-python3 scripts/build_deck.py spec.json --output deck.apkg
+4. For live AnkiConnect import, prepare deterministic media and fields first. The script prepares media in parallel where safe; the actual image web search remains tool-dependent:
+
+   ```bash
+   python3 scripts/build_deck.py spec.json --prepare-media prepared-media.json
+   ```
+
+   Upload the manifest rather than reconstructing paths, attribution, or HTML. Use one preparation/upload pass for the batch. Verify the exact deck/subdeck, note count, model compatibility, one audio per note, one distinct Cleveland Clinic image only where available, blank Image and Source fields for `no_image` cards, uploaded media, source links, and resulting content/scheduling.
+
+## Spec fields
+
+Each card requires `word`, `ipa`, `meaning`, and either `note` or backward-compatible `note_html`. `word` represents exactly one input entry and must contain no newline; parentheses, slashes, and synonyms within that entry are kept together. Repeated entries are allowed and receive separate stable card IDs. Use plain `note` by default. Optional fields: `semantic_identity` (only when the written front does not fully identify the medical concept), `audio_text` (acronyms, slashes, or punctuation), `audio_path` (user-supplied WAV), `refresh_image_cache`, and `no_image`. For a cache miss, provide either an approved Cleveland Clinic `image` with `source_name` and `source_url`, or the complete confirmed-no-image fields described above; never provide both. The source URL must use `clevelandclinic.org` or one of its subdomains.
+
+Example:
+
+```json
+{"deck_title":"MT::示例","cards":[{"word":"fracture","ipa":"/.../","meaning":"骨折","note":"骨或软骨的连续性中断。","image_query":"site:clevelandclinic.org fracture medical illustration","no_image":true,"no_image_reason":"confirmed_no_suitable_cleveland_image","image_search_checked_at":"2026-09-11T12:00:00+08:00"}]}
 ```
 
-The JSON object requires `deck_title` and `cards`. Each card requires `word`, `ipa`, `meaning`, `note_html`, `image`, `source_name`, and `source_url`; `audio_text` and `audio_path` are optional. `image` and `audio_path` are local paths. For grouped cards, use newline characters in `word`, `ipa`, and `meaning` so the entries align vertically. Use `audio_text` to read the grouped terms sequentially, and whenever the written front contains slashes, abbreviations, or punctuation that TTS should not read literally.
-
-After building, verify that note count equals card count, every note has one audio reference and one image reference, all referenced media is embedded, every card image is unique and semantically appropriate, and the package opens as a valid zip/SQLite Anki package. Save the final `.apkg` in the user-requested location; otherwise use the current task's output directory. Copy to Downloads only when explicitly requested.
-
-For a requested AnkiConnect import, perform the equivalent checks against the live notes and media after importing: exact target deck/subdeck, expected note count, one audio and one image per note, unique image references, linked source attribution, and successful scheduling/content verification. Do not replace a requested direct import with an `.apkg` file.
+Save `.apkg` files only to the user-named location or the current task output directory; copy to Downloads only when explicitly requested.
