@@ -7,11 +7,11 @@
 </p>
 
 <p align="center">
-  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-2EA043?style=flat-square&amp;labelColor=30363D">
-  <img alt="Anki package" src="https://img.shields.io/badge/Output-.apkg-2EA043?style=flat-square&amp;labelColor=30363D">
-  <img alt="Offline audio" src="https://img.shields.io/badge/Audio-Offline-2EA043?style=flat-square&amp;labelColor=30363D">
-  <img alt="Light and dark mode" src="https://img.shields.io/badge/Mode-Light%20%2B%20Dark-2EA043?style=flat-square&amp;labelColor=30363D">
-  <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-2EA043?style=flat-square&amp;labelColor=30363D">
+  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-171717?style=flat-square">
+  <img alt="Anki package" src="https://img.shields.io/badge/Output-.apkg-3f3f3f?style=flat-square">
+  <img alt="Offline audio" src="https://img.shields.io/badge/Audio-Offline-626262?style=flat-square">
+  <img alt="Light and dark mode" src="https://img.shields.io/badge/Mode-Light%20%2B%20Dark-626262?style=flat-square">
+  <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-3f3f3f?style=flat-square">
 </p>
 
 ---
