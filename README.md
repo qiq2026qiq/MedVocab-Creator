@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/medterm-to-anki-banner.svg?v=2" alt="MedTerm to Anki Skill" width="100%">
+  <img src="./assets/medterm-to-anki-banner.svg?v=3" alt="MedTerm to Anki Skill" width="100%">
 </p>
 
 <p align="center">
