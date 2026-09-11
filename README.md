@@ -7,11 +7,11 @@
 </p>
 
 <p align="center">
-  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-8B5CF6?style=flat-square&amp;labelColor=5B21B6">
-  <img alt="Anki package" src="https://img.shields.io/badge/Output-.apkg-22C55E?style=flat-square&amp;labelColor=166534">
-  <img alt="Offline audio" src="https://img.shields.io/badge/Audio-Offline-3B82F6?style=flat-square&amp;labelColor=1D4ED8">
-  <img alt="Light and dark mode" src="https://img.shields.io/badge/Mode-Light%20%2B%20Dark-06B6D4?style=flat-square&amp;labelColor=155E75">
-  <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-F59E0B?style=flat-square&amp;labelColor=92400E">
+  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-2EA043?style=flat-square&amp;labelColor=30363D">
+  <img alt="Anki package" src="https://img.shields.io/badge/Output-.apkg-2EA043?style=flat-square&amp;labelColor=30363D">
+  <img alt="Offline audio" src="https://img.shields.io/badge/Audio-Offline-2EA043?style=flat-square&amp;labelColor=30363D">
+  <img alt="Light and dark mode" src="https://img.shields.io/badge/Mode-Light%20%2B%20Dark-2EA043?style=flat-square&amp;labelColor=30363D">
+  <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-2EA043?style=flat-square&amp;labelColor=30363D">
 </p>
 
 ---
@@ -59,7 +59,7 @@ This skill keeps the design quiet so the vocabulary remains the focus. It create
 ## Quick start
 
 ```bash
-git clone https://github.com/qiq2026qiq/MedVocab-Creator.git ~/.codex/skills/medterm-to-anki
+git clone https://github.com/qiq2026qiq/medterm-to-anki.git ~/.codex/skills/medterm-to-anki
 cd ~/.codex/skills/medterm-to-anki
 python3 -m pip install -r requirements.txt
 ```
